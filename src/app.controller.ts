@@ -1,6 +1,9 @@
 import {
   Controller,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
+  ParseFilePipe,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -17,8 +20,17 @@ export class AppController {
     return this.appService.getHello();
   }
   @Post('upload')
-  @UseInterceptors(FileInterceptor('james'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile(
+
+    new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({ maxSize: 1000000000 }),
+        new FileTypeValidator({ fileType: 'jpeg' }),
+      ],
+    }),
+
+  ) file: Express.Multer.File) {
     console.log(file);
   }
 }
