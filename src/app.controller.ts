@@ -21,16 +21,17 @@ export class AppController {
   }
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile(
-
-    new ParseFilePipe({
-      validators: [
-        new MaxFileSizeValidator({ maxSize: 1000000000 }),
-        new FileTypeValidator({ fileType: 'jpeg' }),
-      ],
-    }),
-
-  ) file: Express.Multer.File) {
+  uploadFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1000000000 }),
+          new FileTypeValidator({ fileType: 'jpeg' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
     console.log(file);
   }
 }
