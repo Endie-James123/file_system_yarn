@@ -27,7 +27,7 @@ export class FileController {
   )
   async uploadMultipleFiles(@UploadedFiles() files) {
     const response = [];
-    files.Array.forEach((file) => {
+    files.forEach((file) => {
       const fileResponse = {
         originalname: file.originalname,
         filename: file.filename,
