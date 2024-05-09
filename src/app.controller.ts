@@ -26,7 +26,7 @@ export class AppController {
       new ParseFilePipe({
         validators: [
           new MaxFileSizeValidator({ maxSize: 1000000000 }),
-          new FileTypeValidator({ fileType: 'jpeg' }),
+          new FileTypeValidator({ fileType: 'mp4' }),
         ],
       }),
     )
