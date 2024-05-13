@@ -3,11 +3,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { FileModule } from './file/file.module';
 
 @Module({
-  imports: [
-    MulterModule.register({
-      dest:'./uploads',
-    }),
+  imports:[
     FileModule
-  ],
+  ]
 })
 export class AppModule {}
