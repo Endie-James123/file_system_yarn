@@ -12,9 +12,12 @@ import { editFileName, imageFileFilter } from './utils';
 import { diskStorage } from 'multer';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import * as fs from 'fs';
+import { Throttle } from '@nestjs/throttler';
+import { FileService } from './file.service';
 
 @Controller('file')
 export class FileController {
+  constructor(private readonly fileService:FileService){}
   @Post('multiple')
   @UseInterceptors(
     FilesInterceptor('image', 3, {
@@ -46,9 +49,12 @@ export class FileController {
     });
     return res.end(`${image} successfully deleted`);
   }
-  @Get('who')
+
+
+ @Throttle({default:{limit:3}})
+  @Get('gethello')
   Hello():string{
-    return `who Goes`
+    return this.fileService.getHello()
   }
 
 }
