@@ -46,4 +46,9 @@ export class FileController {
     });
     return res.end(`${image} successfully deleted`);
   }
+  @Get('who')
+  Hello():string{
+    return `who Goes`
+  }
+
 }
